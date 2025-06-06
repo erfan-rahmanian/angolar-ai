@@ -1,0 +1,15 @@
+<div class="product-card fade-in" *ngIf="product">
+  <div class="product-image-container">
+    <img [src]="product.image" [alt]="product.title" class="product-image">
+  </div>
+  <div class="product-info">
+    <h3 class="product-title">{{ product.title | slice:0:50 }}{{ product.title.length > 50 ? '...' : '' }}</h3>
+    <p class="product-category">{{ product.category }}</p>
+    <p class="product-price">{{ product.price | currency:'USD':'symbol' }}</p>
+    <div class="product-rating" *ngIf="product.rating">
+      <span>Rating: {{ product.rating.rate }}/5 ({{ product.rating.count }} reviews)</span>
+      <!-- Simple star display could go here -->
+    </div>
+    <button class="btn btn-add-to-cart" (click)="addToCartHandler()">Add to Cart</button>
+  </div>
+</div>

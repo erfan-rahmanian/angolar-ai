@@ -1,0 +1,3 @@
+/* Styles specific to login page, can be merged with register page styles */
+/* Using styles from a shared auth file would be better. */
+@import url('../../styles/auth-shared.css');

@@ -1,0 +1,31 @@
+<div class="sorting-container fade-in">
+  <h2>Sort Products</h2>
+  <p>Drag and drop products to reorder them. This order will be saved for your next visit to the products page.</p>
+
+  <div *ngIf="isLoading" class="loading-indicator">
+    <div class="spinner"></div>
+    <p>Loading products for sorting...</p>
+  </div>
+  <div *ngIf="error" class="error-message">
+    <p>Error loading products: {{ error }}</p>
+  </div>
+
+  <div
+    *ngIf="!isLoading && !error && productsToDisplay.length > 0"
+    cdkDropList
+    class="product-sort-list"
+    (cdkDropListDropped)="onProductDropped($event)">
+    <div class="product-sort-item" *ngFor="let product of productsToDisplay; let i = index" cdkDrag>
+      <div class="drag-handle" cdkDragHandle>
+        <svg width="24px" height="24px" fill="currentColor" viewBox="0 0 24 24"><path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path></svg>
+      </div>
+      <span class="product-position">{{ i + 1 }}.</span>
+      <img [src]="product.image" [alt]="product.title" class="product-sort-image">
+      <span class="product-sort-title">{{ product.title | slice:0:70 }}{{ product.title.length > 70 ? '...' : '' }}</span>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading && productsToDisplay.length === 0 && !error" class="empty-message">
+    <p>No products available to sort.</p>
+  </div>
+</div>

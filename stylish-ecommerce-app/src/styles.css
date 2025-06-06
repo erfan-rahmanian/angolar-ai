@@ -1,0 +1,170 @@
+/* Global Styles */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+
+:root {
+  --primary-purple: #6A0DAD; /* A deep purple */
+  --secondary-pink: #FF69B4; /* Hot pink */
+  --light-pink: #FFC0CB;   /* Lighter pink for accents */
+  --text-color: #333;
+  --text-color-light: #fff;
+  --background-color: #f8f5fa; /* Lighter, slightly purplish background */
+  --container-padding: 20px;
+  --border-radius: 8px;
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--primary-purple);
+  font-weight: 700;
+}
+
+a {
+  color: var(--secondary-pink);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--primary-purple);
+  text-decoration: none;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px; /* Max width for larger screens */
+  margin: auto;
+  overflow: hidden;
+  padding: var(--container-padding);
+}
+
+/* Button styling */
+.btn {
+  display: inline-block;
+  background: var(--primary-purple);
+  color: var(--text-color-light);
+  padding: 12px 25px;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.btn:hover {
+  background: var(--secondary-pink);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+.btn:active {
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: var(--secondary-pink);
+}
+
+.btn-secondary:hover {
+  background: var(--primary-purple);
+}
+
+/* Basic animation for elements appearing */
+.fade-in {
+  animation: fadeInAnimation 0.6s ease-in-out forwards;
+}
+
+@keyframes fadeInAnimation {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* CSS Spinner for loading indicators */
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid var(--light-pink);
+  border-top-color: var(--primary-purple);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Alert/Error message styling consistency */
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: var(--border-radius);
+  font-size: 0.95em;
+}
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+.alert-success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+.alert-info {
+  color: #0c5460;
+  background-color: #d1ecf1;
+  border-color: #bee5eb;
+}
+.alert-warning {
+  color: #856404;
+  background-color: #fff3cd;
+  border-color: #ffeeba;
+}
+
+/* Form control enhancements */
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 12px 15px; /* Increased padding */
+  font-size: 1em;
+  font-family: 'Montserrat', sans-serif;
+  color: var(--text-color);
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: var(--border-radius);
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  box-sizing: border-box; /* Ensure padding doesn't expand element */
+}
+
+.form-control:focus {
+  border-color: var(--secondary-pink);
+  outline: 0;
+  box-shadow: 0 0 0 .2rem rgba(255, 105, 180, 0.25); /* Pink focus glow */
+}
+
+.form-group label {
+  font-weight: 500;
+  color: var(--primary-purple); /* Label color */
+  margin-bottom: 8px;
+}

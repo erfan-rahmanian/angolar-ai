@@ -1,0 +1,42 @@
+<div class="auth-container fade-in">
+  <h2>Register</h2>
+  <form #registerForm="ngForm" (ngSubmit)="onRegister(registerForm)">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" class="form-control" ngModel required #usernameInput="ngModel">
+      <div *ngIf="usernameInput.invalid && (usernameInput.dirty || usernameInput.touched)" class="alert alert-danger">
+        Username is required.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" class="form-control" ngModel required email #emailRegInput="ngModel">
+      <div *ngIf="emailRegInput.invalid && (emailRegInput.dirty || emailRegInput.touched)" class="alert alert-danger">
+        <span *ngIf="emailRegInput.errors?.['required']">Email is required.</span>
+        <span *ngIf="emailRegInput.errors?.['email']">Please enter a valid email.</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" class="form-control" ngModel required minlength="6" #passwordRegInput="ngModel">
+      <div *ngIf="passwordRegInput.invalid && (passwordRegInput.dirty || passwordRegInput.touched)" class="alert alert-danger">
+        <span *ngIf="passwordRegInput.errors?.['required']">Password is required.</span>
+        <span *ngIf="passwordRegInput.errors?.['minlength']">Password must be at least 6 characters long.</span>
+      </div>
+    </div>
+     <div class="form-group">
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" ngModel required #confirmPasswordInput="ngModel" (ngModelChange)="checkPasswords(registerForm)">
+      <div *ngIf="confirmPasswordInput.invalid && (confirmPasswordInput.dirty || confirmPasswordInput.touched) && registerForm.errors?.['passwordMismatch']" class="alert alert-danger">
+        Passwords do not match.
+      </div>
+       <div *ngIf="confirmPasswordInput.touched && confirmPasswordInput.errors?.['required'] && !registerForm.errors?.['passwordMismatch']" class="alert alert-danger">
+        Confirm Password is required.
+      </div>
+    </div>
+    <button type="submit" class="btn auth-btn" [disabled]="registerForm.invalid || registerForm.errors?.['passwordMismatch']">Register</button>
+  </form>
+  <p class="auth-switch">
+    Already have an account? <a routerLink="/login">Login here</a>
+  </p>
+</div>

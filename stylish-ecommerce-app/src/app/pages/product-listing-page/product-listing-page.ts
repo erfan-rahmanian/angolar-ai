@@ -12,25 +12,20 @@ const USER_SORT_ORDER_KEY = 'userProductSortOrder'; // Shared key
   standalone: true,
   imports: [CommonModule, ProductCard], // Corrected import
   templateUrl: './product-listing-page.html',
-  styleUrls: ['./product-listing-page.css'],
+  styleUrls: ['./product-listing-page.css']
 })
-export class ProductListingPage implements OnInit {
-  // Class name already ProductListingPage
+export class ProductListingPage implements OnInit { // Class name already ProductListingPage
   products: Product[] = [];
   isLoading = true;
   error: string | null = null;
 
-  constructor(
-    private productService: ProductService,
-    private toastr: ToastrService
-  ) {}
+  constructor(private productService: ProductService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.productService.getProducts().subscribe({
       next: (data) => {
         const savedOrder = this.getSavedOrder();
-        if (savedOrder && savedOrder.length > 0) {
-          // Apply if order exists
+        if (savedOrder && savedOrder.length > 0) { // Apply if order exists
           this.products = this.sortProducts(data, savedOrder);
         } else {
           this.products = data;
@@ -38,13 +33,10 @@ export class ProductListingPage implements OnInit {
         this.isLoading = false;
       },
       error: (err) => {
-        this.error = err.message || 'Failed to load products for sorting.';
+        this.error = err.message || 'Failed to load products.';
         this.isLoading = false;
-        this.toastr.error(
-          this.error || 'Failed to load products for sorting.',
-          'API Error'
-        );
-      },
+        this.toastr.error(this.error, 'API Error');
+      }
     });
   }
 
@@ -61,11 +53,11 @@ export class ProductListingPage implements OnInit {
   }
 
   private sortProducts(products: Product[], order: number[]): Product[] {
-    const productMap = new Map(products.map((p) => [p.id, p]));
+    const productMap = new Map(products.map(p => [p.id, p]));
     const sortedProducts: Product[] = [];
 
     // Add products based on saved order
-    order.forEach((id) => {
+    order.forEach(id => {
       const product = productMap.get(id);
       if (product) {
         sortedProducts.push(product);
@@ -75,7 +67,7 @@ export class ProductListingPage implements OnInit {
 
     // Add any remaining products (e.g., new products not in the saved order) to the end
     // This ensures new products are still displayed.
-    productMap.forEach((product) => sortedProducts.push(product));
+    productMap.forEach(product => sortedProducts.push(product));
 
     return sortedProducts;
   }
